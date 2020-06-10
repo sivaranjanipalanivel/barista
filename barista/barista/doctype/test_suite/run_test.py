@@ -225,12 +225,12 @@ def fix_series():
 	print(len(test_data_series))
 	if len(test_data_series) == 0:
 		print("------------------max_test_case_series------")
-		print(max_test_case_series)
+		print(max_test_data_series)
 		frappe.db.sql(
 			"""Insert into `tabSeries` (name,current) values ('TestData-','{max_test_data_series}')""".format(max_test_data_series=max_test_data_series), auto_commit=1)
 	else:
 		print("-------1-----------max_test_case_series------")
-		print(max_test_case_series)
+		print(max_test_data_series)
 		frappe.db.sql(
 			"""update `tabSeries` set current='{max_test_data_series}' where name='TestData-'""".format(max_test_data_series=max_test_data_series), auto_commit=1)
 
@@ -242,10 +242,10 @@ def fix_series():
 		max_test_case_series = int(max_test_case_series[0].split('-')[1])
 	if len(test_case_series) == 0:
 		frappe.db.sql(
-			"""Insert into `tabSeries` (name,current) values ('TestCase-','{max_test_case_series}')""".format(max_test_data_series=max_test_data_series), auto_commit=1)
+			"""Insert into `tabSeries` (name,current) values ('TestCase-','{max_test_case_series}')""".format(max_test_case_series=max_test_case_series), auto_commit=1)
 	else:
 		frappe.db.sql(
-			"""update `tabSeries` set current='{max_test_case_series}' where name='TestCase-'""".format(max_test_data_series=max_test_data_series), auto_commit=1)
+			"""update `tabSeries` set current='{max_test_case_series}' where name='TestCase-'""".format(max_test_case_series=max_test_case_series), auto_commit=1)
 
 	print('Current Series-', frappe.db.sql(
 		"""select * from `tabSeries` where name in ('TestData-','TestCase-')""", as_dict=1))
