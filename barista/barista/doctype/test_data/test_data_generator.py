@@ -76,7 +76,7 @@ class TestDataGenerator():
                         created_doc, testdata_doc, run_name=run_name)
             except Exception as e:
                 frappe.log_error(frappe.get_traceback(
-                ), (f'barista-TestDataGenerator-{testdata}-{str(e)}')[:error_log_title_len])
+                ), ('barista-TestDataGenerator-{testdata}-{str(e)}')[:error_log_title_len])
         if len(all_testdata) != 0:
             print('\033[0;33;93m Pre-Test Data created successfully')
         print('')
@@ -295,7 +295,7 @@ class TestDataGenerator():
                 testdata_doc.doctype_name, test_record_to_save)
         except Exception as e:
             frappe.log_error(frappe.get_traceback(
-            ), (f'barista-TestDataGenerator-{testdata}-Function-[{method}]-'+str(e))[:error_log_title_len])
+            ), ('barista-TestDataGenerator-{testdata}-Function-[{method}]-'+str(e))[:error_log_title_len])
         return generated_doc
 
     def set_record_name_child_table(self, created_doc, parent_doc, create_new_child=False, run_name=None):
@@ -303,7 +303,7 @@ class TestDataGenerator():
         if created_doc:
             parenttype = created_doc.doctype
         new_record_fields = frappe.db.sql(
-            f"select fieldname from `tabDocField` where parent = '{parenttype}'and fieldtype = 'Table'", as_dict=True)
+            "select fieldname from `tabDocField` where parent = '{parenttype}'and fieldtype = 'Table'", as_dict=True)
         for new_record_field in new_record_fields:
             child_records = created_doc.get(new_record_field.fieldname)
             test_data_field_values = frappe.db.sql('select linkfield_name from `tabTestdatafield` where docfield_fieldname = "' +
@@ -347,7 +347,7 @@ def create_test_run_log(run_name, test_data, test_record):
             trl_doc.insert(True)
     except Exception as e:
         frappe.log_error(frappe.get_traceback(
-        ), (f'barista-TRL-{test_data}-{str(e)}')[:error_log_title_len])
+        ), ('barista-TRL-{test_data}-{str(e)}')[:error_log_title_len])
 
 
 def resolve_unique_validation_error(e, testdata_doc, run_name):

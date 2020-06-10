@@ -39,8 +39,8 @@ class RunTest():
             suites = suite_name
 
         run_name_path = run_name.replace(' ', '__').replace('-', '_')
-        barista_app_path = f"{frappe.get_app_path('barista')}/public/test-coverage/{run_name_path}/"
-        data_file_path = str(f"{barista_app_path}{app_name}.coverage")
+        barista_app_path = "{frappe.get_app_path('barista')}/public/test-coverage/{run_name_path}/"
+        data_file_path = str("{barista_app_path}{app_name}.coverage")
 
         shutil.rmtree(barista_app_path, ignore_errors=True)
 
@@ -84,7 +84,7 @@ class RunTest():
             directory=barista_app_path, skip_empty=True, omit=['*test_*'])
 
         print(
-            f"\033[0;33;93m************ Execution ends. Verify coverage at - /assets/barista/test-coverage/{run_name_path}/index.html")
+            "\033[0;33;93m************ Execution ends. Verify coverage at - /assets/barista/test-coverage/{run_name_path}/index.html")
 
         end_time = round(time.time() - start_time, 2)
         time_uom = 'seconds'
@@ -220,10 +220,10 @@ def fix_series():
         max_test_data_series = int(max_test_data_series[0].split('-')[1])
     if len(test_data_series) == 0:
         frappe.db.sql(
-            f"""Insert into `tabSeries` (name,current) values ('TestData-',{max_test_data_series});""", auto_commit=1)
+            """Insert into `tabSeries` (name,current) values ('TestData-',{max_test_data_series});""", auto_commit=1)
     else:
         frappe.db.sql(
-            f"""update `tabSeries` set current={max_test_data_series} where name="TestData-";""", auto_commit=1)
+            """update `tabSeries` set current={max_test_data_series} where name="TestData-";""", auto_commit=1)
 
     test_case_series = frappe.db.sql_list(
         """select * from `tabSeries` where name='TestCase-';""")
@@ -233,10 +233,10 @@ def fix_series():
         max_test_case_series = int(max_test_case_series[0].split('-')[1])
     if len(test_case_series) == 0:
         frappe.db.sql(
-            f"""Insert into `tabSeries` (name,current) values ('TestCase-',{max_test_case_series});""", auto_commit=1)
+            """Insert into `tabSeries` (name,current) values ('TestCase-',{max_test_case_series});""", auto_commit=1)
     else:
         frappe.db.sql(
-            f"""update `tabSeries` set current={max_test_case_series} where name="TestCase-";""", auto_commit=1)
+            """update `tabSeries` set current={max_test_case_series} where name="TestCase-";""", auto_commit=1)
 
     print('Current Series-', frappe.db.sql(
         """select * from `tabSeries` where name in ('TestData-','TestCase-')""", as_dict=1))
@@ -294,10 +294,10 @@ def resolve_run_name(run_name='Pass-1'):
     if frappe.db.exists('Test Run Log', {'test_run_name': run_name}):
         if 'Pass-' in run_name:
             return resolve_run_name(
-                f"Pass-{safe_cast(run_name.split('-')[1],int,1)+1}")
+                "Pass-{safe_cast(run_name.split('-')[1],int,1)+1}")
         else:
             click.echo(
-                f'Provided Run Name [{run_name}] already exists. Please provide other Run Name.')
+                'Provided Run Name [{run_name}] already exists. Please provide other Run Name.')
             sys.exit(1)
     else:
         return run_name
@@ -316,7 +316,7 @@ def get_test_coverage():
     test_coverage_lst = []
     try:
         barista_app_path = frappe.get_app_path('barista')
-        test_coverage_path = f"{barista_app_path}/public/test-coverage"
+        test_coverage_path = "{barista_app_path}/public/test-coverage"
 
         paths = sorted(Path(test_coverage_path).iterdir(),
                        key=os.path.getmtime)
@@ -327,7 +327,7 @@ def get_test_coverage():
                 d = path_parts.pop()
                 run_name = d.replace('__', ' ').replace('_', '-')
                 test_coverage_lst.append({
-                    'coverage_path': f"/assets/barista/test-coverage/{d}/index.html",
+                    'coverage_path': "/assets/barista/test-coverage/{d}/index.html",
                     'test_run_name': run_name
                 })
     except Exception as e:
@@ -342,7 +342,7 @@ def delete_test_coverage(run_name):
     # barista.barista.doctype.test_suite.run_test.delete_test_coverage
     try:
         run_name_path = run_name.replace(' ', '__').replace('-', '_')
-        barista_app_path = f"{frappe.get_app_path('barista')}/public/test-coverage/{run_name_path}/"
+        barista_app_path = "{frappe.get_app_path('barista')}/public/test-coverage/{run_name_path}/"
 
         shutil.rmtree(barista_app_path, ignore_errors=True)
         frappe.db.sql('''

@@ -30,7 +30,7 @@ def resolve_run_name1(run_name):
 
         run_name_parts1 = run_name.split('-')
         if len(run_name_parts1):
-            existing_run_name = frappe.db.sql_list(f"""
+            existing_run_name = frappe.db.sql_list("""
                                                     SELECT max(test_run_name)
                                                     FROM
                                                 (
@@ -47,7 +47,7 @@ def resolve_run_name1(run_name):
                 if existing_run_name[0]:
                     existing_run_name = existing_run_name[0]
                     run_name_parts = existing_run_name.split('-')
-                    run_name = f'{run_name_parts1[0]}-{safe_cast(run_name_parts.pop(),int,0)+1}'
+                    run_name = '{run_name_parts1[0]}-{safe_cast(run_name_parts.pop(),int,0)+1}'
 
         run_name_parts2 = run_name.split(' ')
         if len(run_name_parts2):
@@ -67,7 +67,7 @@ def resolve_run_name1(run_name):
                 if existing_run_name[0]:
                     existing_run_name = existing_run_name[0]
                     run_name_parts = existing_run_name.split(' ')
-                    run_name = f'{run_name_parts2[0]} {safe_cast(run_name_parts.pop(),int,0)+1}'
+                    run_name = '{run_name_parts2[0]} {safe_cast(run_name_parts.pop(),int,0)+1}'
     else:
         # if run_name is not provided use default run_name as Run 1
         existing_run_name = frappe.db.sql_list("""
@@ -86,7 +86,7 @@ def resolve_run_name1(run_name):
             if existing_run_name[0]:
                 existing_run_name = existing_run_name[0]
                 run_name_parts = existing_run_name.split(' ')
-                run_name = f'Run {safe_cast(run_name_parts.pop(),int,0)+1}'
+                run_name = 'Run {safe_cast(run_name_parts.pop(),int,0)+1}'
             else:
                 run_name = 'Run 1'
 
@@ -153,8 +153,7 @@ def clear_test_data(test_data_lst, suite=None):
             'Test Data', test_data, 'test_record_name')
 
         if is_single == 0:
-            frappe.db.sql(
-                f"""
+            frappe.db.sql("""
 				DELETE
 				FROM `tab{doctype}`
 				WHERE name='{record}'
