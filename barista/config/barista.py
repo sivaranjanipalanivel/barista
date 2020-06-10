@@ -44,7 +44,7 @@ def get_data():
                     "name": "Test Case",
                     "icon": "fa fa-sitemap",
                     "label": _("Dashboard"),
-                    "route": "/files/dashboard.png",
+                    "youtube_id": "/files/dashboard.png",
                     "description": _("Dashboard."),
                 },
                 {
@@ -52,7 +52,7 @@ def get_data():
                     "name": "Test Case",
                     "icon": "fa fa-sitemap",
                     "label": _("Sample Manual"),
-                    "route": "/files/sample-manual-testcase.png",
+                    "youtube_id": "/files/sample-manual-testcase.png",
                     "description": _("Sample Manual."),
                 },
                 {
@@ -60,7 +60,7 @@ def get_data():
                     "name": "Test Case",
                     "icon": "fa fa-sitemap",
                     "label": _("Test Case"),
-                    "route": "/files/tc.gif",
+                    "youtube_id": "/files/tc.gif",
                     "description": _("Test Case."),
                 },
                 {
@@ -68,7 +68,7 @@ def get_data():
                     "name": "Test Case",
                     "icon": "fa fa-sitemap",
                     "label": _("Test Data"),
-                    "route": "/files/td.gif",
+                    "youtube_id": "/files/td.gif",
                     "description": _("Test Data."),
                 },
                 {
@@ -76,7 +76,7 @@ def get_data():
                     "name": "Test Case",
                     "icon": "fa fa-sitemap",
                     "label": _("Test Result"),
-                    "route": "/files/test-result.gif",
+                    "youtube_id": "/files/test-result.gif",
                     "description": _("Test Result."),
                 },
             ]
