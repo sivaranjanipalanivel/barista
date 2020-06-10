@@ -222,6 +222,7 @@ def fix_series():
 	if len(max_test_data_series):
 		max_test_data_series = int(max_test_data_series[0].split('-')[1])  
 	print(max_test_data_series)
+	print(len(test_data_series))
 	if len(test_data_series) == 0:
 		print("------------------max_test_case_series------")
 		print(max_test_case_series)
