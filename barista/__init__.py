@@ -133,7 +133,7 @@ def clear_test_data(test_data_lst, suite=None):
     i = 0
 
     if suite:
-        print(f'Resetting Test Data for this Test Suite ---> {suite}')
+        print('Resetting Test Data for this Test Suite ---> {suite}')
 
     # if total != 0:
     # 	printProgressBar(0, total, prefix='Progress:',
@@ -206,7 +206,7 @@ def printProgressBar(iteration, total, prefix='', suffix='', decimals=1, length=
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
 
-    print(f'''\r{prefix} |{bar}| {step}% {suffix}''', end=printEnd)
+    print('''\r{prefix} |{bar}| {step}% {suffix}''', end=printEnd)
     # Print New Line on Complete
     if iteration == total:
         print()
