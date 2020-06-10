@@ -145,7 +145,7 @@ class TestDataGenerator():
                                         child_doc)
                                 else:
                                     frappe.throw(
-                                        f'Child Doc is None. Test Data of Child {declared_field_doc.linkfield_name}. Test Data of Parent {testdata}')
+                                        'Child Doc is None. Test Data of Child {declared_field_doc.linkfield_name}. Test Data of Parent {testdata}')
 
                             # link parent to this record
                             elif ("Link" in field_doc.fieldtype and declared_field_doc.docfield_code_value == "Fixed Value"):
@@ -200,7 +200,7 @@ class TestDataGenerator():
                 return new_doc
         except Exception as e:
             frappe.log_error(frappe.get_traceback(
-            ), (f'barista-TestDataGenerator-{testdata}-DocTypeField-[{current_fieldname}]-'+str(e))[:error_log_title_len])
+            ), ('barista-TestDataGenerator-{testdata}-DocTypeField-[{current_fieldname}]-'+str(e))[:error_log_title_len])
 
     def assign_random_value(self, flag_field, field_doc, new_doc, declared_field_doc):
         if(flag_field == False and not field_doc.fetch_from):

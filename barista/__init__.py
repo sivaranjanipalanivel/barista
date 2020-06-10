@@ -51,7 +51,7 @@ def resolve_run_name1(run_name):
 
         run_name_parts2 = run_name.split(' ')
         if len(run_name_parts2):
-            existing_run_name = frappe.db.sql_list(f"""
+            existing_run_name = frappe.db.sql_list("""
                                                     SELECT max(test_run_name)
                                                     FROM
                                                 (
