@@ -217,11 +217,17 @@ def fix_series():
     max_test_data_series = frappe.db.sql_list(
         """select ifnull(max(name),'TestData-0') from `tabTest Data`;""")
     if len(max_test_data_series):
-        max_test_data_series = int(max_test_data_series[0].split('-')[1])
+        max_test_data_series = int(max_test_data_series[0].split('-')[1])  
+
+ 
     if len(test_data_series) == 0:
+	print("------------------max_test_case_series------")
+	print(max_test_case_series)
         frappe.db.sql(
             """Insert into `tabSeries` (name,current) values ('TestData-','{max_test_data_series}')""".format(max_test_data_series=max_test_data_series), auto_commit=1)
     else:
+	print("-------1-----------max_test_case_series------")
+	print(max_test_case_series)
         frappe.db.sql(
             """update `tabSeries` set current='{max_test_data_series}' where name='TestData-'""".format(max_test_data_series=max_test_data_series), auto_commit=1)
 
