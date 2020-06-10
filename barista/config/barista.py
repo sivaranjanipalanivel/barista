@@ -41,6 +41,12 @@ def get_data():
             "items": [
                 {
                     "type": "doctype",
+                    "name": "Help Article",
+                    "icon": "fa fa-sitemap",
+                    "label": _("Help Article"),
+                },
+                {
+                    "type": "doctype",
                     "name": "Test Case",
                     "icon": "fa fa-sitemap",
                     "label": _("Dashboard"),
