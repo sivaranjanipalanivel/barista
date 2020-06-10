@@ -218,6 +218,7 @@ def fix_series():
 		"""select ifnull(max(name),'TestData-0') from `tabTest Data`;""")
 	print("-----------max----------")
 	print(max_test_data_series)
+	print(len(max_test_data_series))
 	if len(max_test_data_series):
 		max_test_data_series = int(max_test_data_series[0].split('-')[1])  
 
