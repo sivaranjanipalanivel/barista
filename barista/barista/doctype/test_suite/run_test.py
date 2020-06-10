@@ -216,6 +216,8 @@ def fix_series():
 		"""select * from `tabSeries` where name='TestData-';""")
 	max_test_data_series = frappe.db.sql_list(
 		"""select ifnull(max(name),'TestData-0') from `tabTest Data`;""")
+	print("-----------max----------")
+	print(max_test_data_series)
 	if len(max_test_data_series):
 		max_test_data_series = int(max_test_data_series[0].split('-')[1])  
 
