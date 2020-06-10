@@ -37,6 +37,51 @@ def get_data():
 
         },
         {
+            "label": "Help",
+            "items": [
+                {
+                    "type": "doctype",
+                    "name": "Test Case",
+                    "icon": "fa fa-sitemap",
+                    "label": _("Dashboard"),
+                    "route": "/files/dashboard.png",
+                    "description": _("Dashboard."),
+                },
+                {
+                    "type": "doctype",
+                    "name": "Test Case",
+                    "icon": "fa fa-sitemap",
+                    "label": _("Sample Manual"),
+                    "route": "/files/sample-manual-testcase.png",
+                    "description": _("Sample Manual."),
+                },
+                {
+                    "type": "doctype",
+                    "name": "Test Case",
+                    "icon": "fa fa-sitemap",
+                    "label": _("Test Case"),
+                    "route": "/files/tc.gif",
+                    "description": _("Test Case."),
+                },
+                {
+                    "type": "doctype",
+                    "name": "Test Case",
+                    "icon": "fa fa-sitemap",
+                    "label": _("Test Data"),
+                    "route": "/files/td.gif",
+                    "description": _("Test Data."),
+                },
+                {
+                    "type": "doctype",
+                    "name": "Test Case",
+                    "icon": "fa fa-sitemap",
+                    "label": _("Test Result"),
+                    "route": "/files/test-result.gif",
+                    "description": _("Test Result."),
+                },
+            ]
+        },
+        {
             "label": "Reports",
             "items": [
                 {
