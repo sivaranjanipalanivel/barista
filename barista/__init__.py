@@ -153,8 +153,7 @@ def clear_test_data(test_data_lst, suite=None):
             'Test Data', test_data, 'test_record_name')
 
         if is_single == 0:
-            frappe.db.sql(
-                f"""
+            frappe.db.sql("""
 				DELETE
 				FROM `tab{doctype}`
 				WHERE name='{record}'
