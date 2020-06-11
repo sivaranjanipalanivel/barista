@@ -64,7 +64,7 @@ class TestCaseExecution():
             test_result_doc.test_case_execution = "Executed"
             # test result fields ended
             print(
-                "\033[0;36;96m>> ({str(suite_srno)}/{str(total_suites)}) {str(testcase)}:{testcase_doc.testcase_type} [{str(testcase_srno)}/{str(total_testcases)}] :")
+                "\033[0;36;96m>> ({suite_srno}/{total_suites}) {testcase}:{testcase_type} [{testcase_srno}/{total_testcases}] :".format(suite_srno=str(suite_srno), total_suites=str(total_suites), testcase=str(testcase), testcase_type=testcase_doc.testcase_type, testcase_srno=str(testcase_srno), total_testcases=str(total_testcases)))
             testdata_generator = TestDataGenerator()
             # Test Data record doc
             if testcase_doc.test_data:
@@ -113,7 +113,7 @@ class TestCaseExecution():
                             print("\033[0;33;93m    >>> Test Data created")
                     else:
                         frappe.throw(
-                            'Test Data {testcase_doc.test_data} generated None doc. Please check Test Data {testcase_doc.test_data}')
+                            'Test Data {test_data} generated None doc. Please check Test Data {test_data}'.format(test_data=testcase_doc.test_data))
                 except Exception as e:
                     frappe.log_error(frappe.get_traceback(
                     ), ('barista-CREATE-'+testcase_doc.name+'-'+str(e))[:error_log_title_len])
@@ -135,7 +135,7 @@ class TestCaseExecution():
                                 testcase_doc.testcase_doctype, existing_doc_name)
                         else:
                             test_result_doc.test_case_execution = "Execution Failed"
-                            test_result_doc.execution_result = "The Test Case DocType - {testcase_doc.testcase_doctype} with reference field {testcase_doc.test_case_docfield} value {testdata_doc_test_record_name} records found {str(len(all_existing_docs))}"
+                            test_result_doc.execution_result = "The Test Case DocType - {testcase_doctype} with reference field {test_case_docfield} value {testdata_doc_test_record_name} records found {all_existing_docs}".format(testcase_doctype=testcase_doc.testcase_doctype, test_case_docfield=testcase_doc.test_case_docfield, testdata_doc_test_record_name=testdata_doc_test_record_name, all_existing_docs=str(len(all_existing_docs)))
                             test_result_doc.test_case_status = "Failed"
                             frappe.throw(test_result_doc.execution_result)
 
@@ -218,7 +218,7 @@ class TestCaseExecution():
                                         child_doc.save()
                                     else:
                                         frappe.throw(
-                                            "Child Doc is None. Test Data of Child {update_field_doc.linkfield_name}. Test Data of Parent {testdata_doc.name}")
+                                            "Child Doc is None. Test Data of Child {linkfield_name}. Test Data of Parent {name}".format(linkfield_name= update_field_doc.linkfield_name, name=testdata_doc.name))
                                 except frappe.DuplicateEntryError as e:
                                     child_doc = resolve_duplicate_entry_error(
                                         e, child_testdata_doc, run_name)
@@ -250,7 +250,7 @@ class TestCaseExecution():
                             print("\033[0;33;93m    >>> Test Data updated")
                         else:
                             frappe.throw(
-                                "Test Data {testdata_doc.name} generated None doc. Please check Test Data {testcase_doc.test_data}")
+                                "Test Data {name} generated None doc. Please check Test Data {test_data}".format(name=testdata_doc.name, test_data=testcase_doc.test_data))
                     except frappe.UniqueValidationError as e:
                         new_record_doc = resolve_unique_validation_error(
                             e, testdata_doc, run_name)
@@ -295,7 +295,7 @@ class TestCaseExecution():
                     print("\033[0;32;92m    >>> Workflow Applied")
                 except Exception as e:
                     frappe.log_error(frappe.get_traceback(), ("""barista-WORKFLOW-{testcase_doc.name}-{str(
-                        e)}-DocType-[{testdata_doc.doctype_name}]-WorkflowState-[{current_workflow_state}]-Action-[{testcase_doc.workflow_state}]""")[:error_log_title_len])
+                        e)}-DocType-[{doctype_name}]-WorkflowState-[{current_workflow_state}]-Action-[{workflow_state}]""".format(name=testcase_doc.name, current_workflow_state=current_workflow_state, doctype_name=testdata_doc.doctype_name, workflow_state=testcase_doc.workflow_state))[:error_log_title_len])
                     error_message = str(e)
                     print(
                         "\033[0;31;91m    >>> Error in applying Workflow - "+str(e))
@@ -416,7 +416,7 @@ class TestCaseExecution():
             assertion_doc.reference_field = 'name'
 
         print(
-            "\033[0;37;97m       >>>> Applying {assertion_doc.assertion_type} assertion :{str(assertion['name'])}")
+            "\033[0;37;97m       >>>> Applying {assertion_type} assertion :{assertion}".format(assertion_type=assertion_doc.assertion_type, assertion=str(assertion['name'])))
         assertion_result = frappe.new_doc("Assertion Result")
         assertion_result.assertion = assertion_doc.name
         assertion_result.assertion_status = "Passed"
@@ -474,7 +474,7 @@ class TestCaseExecution():
 
                         if(error_message):
                             # there was some error as well.
-                            assertion_result.assertion_result = "{assertion_result.assertion_result} \n\nError Encountered :{error_message}"
+                            assertion_result.assertion_result = "{assertion_result} \n\nError Encountered :{error_message}".format(assertion_result=assertion_result.assertion_result,error_message=error_message)
 
                         test_result_doc.test_case_status = "Failed"
                         print(
@@ -525,7 +525,7 @@ class TestCaseExecution():
         elif (assertion_doc.assertion_type == "WORKFLOW"):
             if (len(validation_doctype) != 1):
                 assertion_result.assertion_status = "Failed"
-                assertion_result.assertion_result = """Actual number of record(s) found - {str(len(validation_doctype))}. For Doctype - {assertion_doc.doctype_name}. Name - {assertion_doc.reference_field}. Value - {testdata_doc_test_record_name}"""
+                assertion_result.assertion_result = """Actual number of record(s) found - {str(len(validation_doctype))}. For Doctype - {doctype_name}. Name - {reference_field}. Value - {testdata_doc_test_record_name}""".format(doctype_name=assertion_doc.doctype_name,reference_field=assertion_doc.reference_field,testdata_doc_test_record_name=testdata_doc_test_record_name)
                 test_result_doc.test_case_status = "Failed"
                 print("\033[0;31;91m       >>>> Assertion Failed")
                 if(error_message):
