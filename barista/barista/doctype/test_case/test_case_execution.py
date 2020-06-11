@@ -354,6 +354,8 @@ class TestCaseExecution():
                         args = []
                         function_result = frappe.get_attr(
                             method)(*args, **kwargs)
+                        print("\033>>>>")
+                        print("\033"+function_result)
                     else:
                         test_data_record_name = frappe.db.get_value(
                             'Test Run Log', {'test_run_name': run_name, 'test_data': testcase_doc.test_data}, 'test_record')
@@ -362,6 +364,8 @@ class TestCaseExecution():
                             testcase_doc.testcase_doctype, test_data_record_name)
                         function_result = test_record_doc.run_method(
                             method, **kwargs)
+                        print("\033>>>>")
+                        print("\033"+function_result)
                     print("\033[0;32;92m     >>> Function Executed")
                 except Exception as e:
                     frappe.log_error(frappe.get_traceback(
