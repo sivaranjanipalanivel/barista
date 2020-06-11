@@ -311,27 +311,35 @@ class TestCaseExecution():
                 try:
                     for param in testcase_doc.function_parameters:
                         parameter = param.parameter
-
+                        print("------1-----")
+                        print(parameter)
                         if param.value and param.value.strip()[0] in ['{', '[']:
                             value = eval(param.value)
                         else:
                             value = param.value
                         kwargs[parameter] = value
-
+                        print("------2-----")
+                        print(kwargs)
                         if param.test_data:
                             test_record_name = frappe.db.get_value(
                                 'Test Run Log', {'test_run_name': run_name, 'test_data': param.test_data}, 'test_record')
-
+                            print("-----3------")
+                            print(test_record_name)
                             test_record_doctype = frappe.db.get_value(
                                 'Test Data', param.test_data, 'doctype_name')
+                            print("-----4------")
+                            print(test_record_doctype)
                             test_record_doc = frappe.get_doc(
                                 test_record_doctype, test_record_name)
+                            print("-----5------")
+                            print(test_record_doc)
                             if param.is_object == 1:
                                 kwargs[parameter] = test_record_doc.as_dict()
                             else:
                                 kwargs[parameter] = test_record_doc.get(
                                     param.field)
-
+                            print("-----6------")
+                            print(kwargs)
                     print("\033[0;33;93m   >>> Executing Function --",
                           testcase_doc.function_name)
                     if testcase_doc.json_parameter and testcase_doc.json_parameter.strip() != '':
@@ -356,6 +364,7 @@ class TestCaseExecution():
 
                     method = testcase_doc.function_name
                     if method and '.' in method:
+                        print("------method------")
                         args = []
                         function_result = frappe.get_attr(
                             method)(*args, **kwargs)
