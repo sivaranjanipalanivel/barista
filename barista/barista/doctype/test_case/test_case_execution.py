@@ -434,10 +434,14 @@ class TestCaseExecution():
         assertion_result = frappe.new_doc("Assertion Result")
         assertion_result.assertion = assertion_doc.name
         assertion_result.assertion_status = "Passed"
+        print("----------test data-----------")
+        print(testcase_doc.test_data)
         testdata_doc = frappe.get_doc(
             'Test Data', testcase_doc.test_data)
         testdata_doc_test_record_name = frappe.db.get_value(
             'Test Run Log', {'test_run_name': run_name, 'test_data': testcase_doc.test_data}, 'test_record')
+        print("-------------run------------")
+        print(testdata_doc_test_record_name)
         if(assertion_doc.assertion_type != "RESPONSE" and assertion_doc.assertion_type != "ERROR"):
             validation_doctype = frappe.get_all(assertion_doc.doctype_name, filters={
                                                 assertion_doc.reference_field: testdata_doc_test_record_name})
