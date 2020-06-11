@@ -64,6 +64,8 @@ class TestDataGenerator():
                         try:
                             new_doc.save(True)
                             created_doc = new_doc
+                            print("--------test data----------")
+                            print(created_doc.name)
                         except frappe.DuplicateEntryError as e:
                             created_doc = resolve_duplicate_entry_error(
                                 e, testdata_doc, run_name)
@@ -327,6 +329,10 @@ class TestDataGenerator():
 
 def create_test_run_log(run_name, test_data, test_record):
     try:
+        print("-------------Create Test Run-------------")
+        print(run_name)
+        print(test_data)
+        print(test_record)
         existing_trl_doc = frappe.get_all(
             'Test Run Log', {'test_run_name': run_name, 'test_data': test_data})
         if len(existing_trl_doc):
