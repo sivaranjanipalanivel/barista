@@ -76,7 +76,7 @@ class TestDataGenerator():
                         created_doc, testdata_doc, run_name=run_name)
             except Exception as e:
                 frappe.log_error(frappe.get_traceback(
-                ), ('barista-TestDataGenerator-{testdata}-{str(e)}')[:error_log_title_len])
+                ), ('barista-TestDataGenerator-{testdata}-{e}'.format(testdata=testdata, e=str(e)))[:error_log_title_len])
         if len(all_testdata) != 0:
             print('\033[0;33;93m Pre-Test Data created successfully')
         print('')
@@ -200,7 +200,7 @@ class TestDataGenerator():
                 return new_doc
         except Exception as e:
             frappe.log_error(frappe.get_traceback(
-            ), ('barista-TestDataGenerator-{testdata}-DocTypeField-[{current_fieldname}]-'+str(e))[:error_log_title_len])
+            ), ('barista-TestDataGenerator-{testdata}-DocTypeField-[{current_fieldname}]-'.format(testdata=testdata, current_fieldname=current_fieldname)+str(e))[:error_log_title_len])
 
     def assign_random_value(self, flag_field, field_doc, new_doc, declared_field_doc):
         if(flag_field == False and not field_doc.fetch_from):
@@ -295,7 +295,7 @@ class TestDataGenerator():
                 testdata_doc.doctype_name, test_record_to_save)
         except Exception as e:
             frappe.log_error(frappe.get_traceback(
-            ), ('barista-TestDataGenerator-{testdata}-Function-[{method}]-'+str(e))[:error_log_title_len])
+            ), ('barista-TestDataGenerator-{testdata}-Function-[{method}]-'.format(testdata=testdata, method=method)+str(e))[:error_log_title_len])
         return generated_doc
 
     def set_record_name_child_table(self, created_doc, parent_doc, create_new_child=False, run_name=None):
@@ -347,7 +347,7 @@ def create_test_run_log(run_name, test_data, test_record):
             trl_doc.insert(True)
     except Exception as e:
         frappe.log_error(frappe.get_traceback(
-        ), ('barista-TRL-{test_data}-{str(e)}')[:error_log_title_len])
+        ), ('barista-TRL-{test_data}-{e}'.format(test_data=test_data, e=str(e)))[:error_log_title_len])
 
 
 def resolve_unique_validation_error(e, testdata_doc, run_name):
