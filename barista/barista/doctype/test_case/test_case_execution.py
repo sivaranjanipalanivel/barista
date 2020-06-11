@@ -166,9 +166,10 @@ class TestCaseExecution():
                             if field.fieldname == update_field_doc.docfield_fieldname:
                                 field_doc = field
                                 break
-
+                        print("Field Name:"+update_field_doc.docfield_fieldname)
                         if update_field_doc.docfield_fieldname == "name":
                             new_name = update_field_doc.docfield_value
+                            print("Field Value:"+new_name)
                             if update_field_doc.docfield_code_value == "Code":
                                 new_name = eval(update_field_doc.docfield_code)
 
@@ -179,6 +180,7 @@ class TestCaseExecution():
 
                             new_record_doc = frappe.get_doc(
                                 update_field_doc.doctype_name, new_name)
+                           
                             create_test_run_log(
                                 run_name, testdata_doc.name, new_record_doc.name)
                         elif new_record_doc and update_field_doc.docfield_fieldname == "docstatus":
