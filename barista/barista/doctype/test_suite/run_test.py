@@ -39,8 +39,9 @@ class RunTest():
 			suites = suite_name
 
 		run_name_path = run_name.replace(' ', '__').replace('-', '_')
-		barista_app_path = "{frappe.get_app_path('barista')}/public/test-coverage/{run_name_path}/"
-		data_file_path = str("{barista_app_path}{app_name}.coverage")
+		app_paths = frappe.get_app_path('barista')
+		barista_app_path = "{app_paths}/public/test-coverage/{run_name_path}/".format(app_paths=app_paths,run_name_path=run_name_path)
+		data_file_path = str("{barista_app_path}{app_name}.coverage".format(barista_app_path=barista_app_path, app_name=app_name))
 
 		shutil.rmtree(barista_app_path, ignore_errors=True)
 
@@ -352,7 +353,8 @@ def delete_test_coverage(run_name):
 	# barista.barista.doctype.test_suite.run_test.delete_test_coverage
 	try:
 		run_name_path = run_name.replace(' ', '__').replace('-', '_')
-		barista_app_path = "{frappe.get_app_path('barista')}/public/test-coverage/{run_name_path}/"
+		app_paths = frappe.get_app_path('barista')
+		barista_app_path = "{app_paths}/public/test-coverage/{run_name_path}/".format(app_paths=app_paths, run_name_path=run_name_path)
 
 		shutil.rmtree(barista_app_path, ignore_errors=True)
 		frappe.db.sql('''
