@@ -303,11 +303,11 @@ def resolve_run_name(run_name='Pass-1'):
 
 	if frappe.db.exists('Test Run Log', {'test_run_name': run_name}):
 		if 'Pass-' in run_name:
-			return resolve_run_name(
-				"Pass-{safe_cast(run_name.split('-')[1],int,1)+1}")
+			resolve_name = "Pass-{r_name}".format(r_name=safe_cast(run_name.split('-')[1],int,1)+1)
+			return resolve_run_name(resolve_name)
 		else:
 			click.echo(
-				'Provided Run Name [{run_name}] already exists. Please provide other Run Name.')
+				'Provided Run Name [{run_name}] already exists. Please provide other Run Name.'.format(run_name=run_name))
 			sys.exit(1)
 	else:
 		return run_name
