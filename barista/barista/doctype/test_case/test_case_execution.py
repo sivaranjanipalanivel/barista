@@ -302,6 +302,7 @@ class TestCaseExecution():
 
             elif (testcase_doc.testcase_type == "FUNCTION"):
                 kwargs = {}
+                error_message=""
                 try:
                     for param in testcase_doc.function_parameters:
                         parameter = param.parameter
