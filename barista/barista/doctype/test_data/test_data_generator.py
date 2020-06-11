@@ -284,9 +284,16 @@ class TestDataGenerator():
                         e, testdata_doc, run_name)
 
             if testdata_doc.eval_function_result:
+                print("----------1----------")
+                print(testdata_doc.eval_function_result)
                 test_record_to_save = eval(testdata_doc.eval_function_result)
+                print(test_record_to_save)
             else:
+                print("----------2----------")
+                print(result)
                 if result:
+                    print("----------2----------")
+                    print(result.get('name'))
                     test_record_to_save = result.get('name')
             print("<<<---test_record_to_save--->>>")
             print(test_record_to_save)
