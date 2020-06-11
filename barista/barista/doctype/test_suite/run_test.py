@@ -326,7 +326,7 @@ def get_test_coverage():
 	try:
 		barista_app_path = frappe.get_app_path('barista')
 		print(barista_app_path)
-		test_coverage_path = "{barista_app_path}/public/test-coverage"
+		test_coverage_path = "{barista_app_path}/public/test-coverage".format(barista_app_path=barista_app_path)
 		print(test_coverage_path)
 		paths = sorted(Path(test_coverage_path).iterdir(),
 					   key=os.path.getmtime)
