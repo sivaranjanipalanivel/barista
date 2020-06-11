@@ -20,6 +20,7 @@ frappe.pages['test-coverage'].on_page_load = function (wrapper) {
 	</style>
 	`);
 	getTestCoverage();
+	console.log("---------------------------")
 	$('.ellipsis.title-text').append(`<span> <i class="fa fa-repeat" style="cursor: pointer;color: blue;" title="Click to refresh" onClick="getTestCoverage();"></i></span>`);
 }
 
@@ -29,6 +30,8 @@ function getTestCoverage() {
 		method: 'barista.barista.doctype.test_suite.run_test.get_test_coverage',
 		freeze: true,
 		callback: function (r) {
+			console.log("---------------3")
+			console.log(r)
 			if (!r.exc) {
 				const testCoverages = r.message;
 				let srNo = 1;
@@ -72,6 +75,8 @@ function deleteTestCoverage(run_name) {
 		freeze: true,
 		freeze_message: `Deleting Test Coverage of Test Run ${run_name}`,
 		callback: function (r) {
+			console.log("---------------4")
+			console.log(r)
 			if (!r.exc) {
 				getTestCoverage();
 			}
