@@ -436,8 +436,10 @@ class TestCaseExecution():
         assertion_result.assertion_status = "Passed"
         print("----------test data-----------")
         print(testcase_doc.test_data)
+        print(run_name)
         testdata_doc = frappe.get_doc(
             'Test Data', testcase_doc.test_data)
+        print(testdata_doc.name)
         testdata_doc_test_record_name = frappe.db.get_value(
             'Test Run Log', {'test_run_name': run_name, 'test_data': testcase_doc.test_data}, 'test_record')
         print("-------------run------------")
