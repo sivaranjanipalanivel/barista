@@ -328,6 +328,7 @@ def get_test_coverage():
 		paths = Path(test_coverage_path).iterdir()
 		print(paths)
 		for path in paths:
+			print(path)
 			if path.is_dir():
 				path_parts = str(path).split('/')
 				d = path_parts.pop()
