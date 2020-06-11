@@ -328,10 +328,13 @@ def get_test_coverage():
 		barista_app_path = frappe.get_app_path('barista')
 		print(barista_app_path)
 		test_coverage_path = "{barista_app_path}/public/test-coverage".format(barista_app_path=barista_app_path)
+		print("--------------test_coverage_path-----------------")
 		print(test_coverage_path)
+		print(Path(test_coverage_path).iterdir())
+		print(os.path.getmtime)
 		paths = sorted(Path(test_coverage_path).iterdir(),
 					   key=os.path.getmtime)
-
+		print(paths)
 		for path in paths:
 			if path.is_dir():
 				path_parts = str(path).split('/')
