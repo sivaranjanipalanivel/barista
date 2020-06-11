@@ -277,6 +277,7 @@ class TestDataGenerator():
                     result = frappe.get_attr(
                         method)(*args, **kwargs)
                     print("--------result--------")
+                    print(method)
                     print(result)
                 except frappe.DuplicateEntryError as e:
                     result = resolve_duplicate_entry_error(
