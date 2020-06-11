@@ -325,7 +325,7 @@ def get_test_coverage():
 		print(Path(test_coverage_path).iterdir())
 		print(str(Path(test_coverage_path).iterdir()))
 		print(str(os.path.getmtime))
-		paths = sorted(str(Path(test_coverage_path).iterdir()),
+		paths = sorted(Path(str(test_coverage_path)).iterdir(),
 					   key=os.path.getmtime)
 		print(paths)
 		for path in paths:
