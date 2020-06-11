@@ -63,6 +63,8 @@ class TestCaseExecution():
             test_result_doc.test_case_status = "Passed"
             test_result_doc.test_case_execution = "Executed"
             # test result fields ended
+            print("Update function execution")
+            print("Update function:"+test_result_doc.test_case)
             print(
                 "\033[0;36;96m>> ({suite_srno}/{total_suites}) {testcase}:{testcase_type} [{testcase_srno}/{total_testcases}] :".format(suite_srno=str(suite_srno), total_suites=str(total_suites), testcase=str(testcase), testcase_type=testcase_doc.testcase_type, testcase_srno=str(testcase_srno), total_testcases=str(total_testcases)))
             testdata_generator = TestDataGenerator()
@@ -122,6 +124,7 @@ class TestCaseExecution():
 
             elif (testcase_doc.testcase_type == "UPDATE"):
                 try:
+                    print("Update function execution")
                     create_new = False
                     if testcase_doc.testcase_doctype != testdata_doc.doctype_name:
                         value_from_test_record_doc = frappe.db.get_value(
@@ -357,7 +360,7 @@ class TestCaseExecution():
                         function_result = frappe.get_attr(
                             method)(*args, **kwargs)
                         print("\033>>>>")
-                        print("\033"+function_result)
+                        print("\033"+str(function_result))
                     else:
                         test_data_record_name = frappe.db.get_value(
                             'Test Run Log', {'test_run_name': run_name, 'test_data': testcase_doc.test_data}, 'test_record')
@@ -367,7 +370,7 @@ class TestCaseExecution():
                         function_result = test_record_doc.run_method(
                             method, **kwargs)
                         print("\033>>>>")
-                        print("\033"+function_result)
+                        print("\033"+str(function_result))
                     print("\033[0;32;92m     >>> Function Executed")
                 except Exception as e:
                     frappe.log_error(frappe.get_traceback(
