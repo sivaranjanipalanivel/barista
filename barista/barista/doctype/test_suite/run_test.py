@@ -85,7 +85,7 @@ class RunTest():
 			directory=barista_app_path, skip_empty=True, omit=['*test_*'])
 
 		print(
-			"\033[0;33;93m************ Execution ends. Verify coverage at - /assets/barista/test-coverage/{run_name_path}/index.html")
+			"\033[0;33;93m************ Execution ends. Verify coverage at - /assets/barista/test-coverage/{run_name_path}/index.html".format(run_name_path=run_name_path))
 
 		end_time = round(time.time() - start_time, 2)
 		time_uom = 'seconds'
