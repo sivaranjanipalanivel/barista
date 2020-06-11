@@ -334,7 +334,7 @@ def get_test_coverage():
 				d = path_parts.pop()
 				run_name = d.replace('__', ' ').replace('_', '-')
 				test_coverage_lst.append({
-					'coverage_path': "/assets/barista/test-coverage/{d}/index.html",
+					'coverage_path': "/assets/barista/test-coverage/{d}/index.html".format(d=d),
 					'test_run_name': run_name
 				})
 	except Exception as e:
