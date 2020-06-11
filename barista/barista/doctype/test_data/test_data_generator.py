@@ -276,6 +276,8 @@ class TestDataGenerator():
                 try:
                     result = frappe.get_attr(
                         method)(*args, **kwargs)
+                    print("--------result--------")
+                    print(result)
                 except frappe.DuplicateEntryError as e:
                     result = resolve_duplicate_entry_error(
                         e, testdata_doc, run_name)
@@ -284,15 +286,15 @@ class TestDataGenerator():
                         e, testdata_doc, run_name)
 
             if testdata_doc.eval_function_result:
-                print("----------1----------")
+                print("----------01----------")
                 print(testdata_doc.eval_function_result)
                 test_record_to_save = eval(testdata_doc.eval_function_result)
                 print(test_record_to_save)
             else:
-                print("----------2----------")
+                print("----------02----------")
                 print(result)
                 if result:
-                    print("----------2----------")
+                    print("----------03----------")
                     print(result.get('name'))
                     test_record_to_save = result.get('name')
             print("<<<---test_record_to_save--->>>")
