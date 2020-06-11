@@ -325,8 +325,13 @@ def get_test_coverage():
 		print(Path(test_coverage_path).iterdir())
 		print(str(Path(test_coverage_path).iterdir()))
 		print(str(os.path.getmtime))
-		paths = sorted(Path(str(test_coverage_path)).iterdir(),
-					   key=os.path.getmtime)
+		# paths = sorted(Path(str(test_coverage_path)).iterdir(),
+		# 			   key=os.path.getmtime)
+		
+		os.chdir(test_coverage_path)
+		paths = filter(os.path.isfile, os.listdir(test_coverage_path))
+		paths = [os.path.join(test_coverage_path, f) for f in paths] # add path to each file
+		paths.sort(key=lambda x: os.path.getmtime(x))
 		print(paths)
 		for path in paths:
 			if path.is_dir():
